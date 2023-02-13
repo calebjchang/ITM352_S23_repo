@@ -10,39 +10,42 @@
         const store_name = "Caleb Chang"
         var hits = 0; 
         var spins = 0;
-         var first_name = "Caleb";
-         var last_name = "Chang";
-</script>
+        var over_half = false;
+    </script>
 </head>
 <body>
 <header>
     <h1>
-        <span style="font-size: 100px; font-weight: bold;">Caleb</span>
-        <span style="font-size: 100px; font-style: italic;"> Chang</span>
-        's Used Smart Phone Store
+    <span id="s_name"></span>'s Used Smart Phone Store
     <script> s_name.innerHTML=store_name</script>
     </h1>
     <p style="text-align: center; font-weight: bold;">
         Hits:<span id="hits_span">0</span>
         Spins:<span id="spins_span">0</span>
-        </p>
+        You win:<span id="win_span">pending...</span>    
+    </p>
         <p style="text-align: center; font-weight: bold;">Hit/Spin:<span id="hit_spin_span">0</span></p>
-        
 </header> 
     <div>
         <main>
          <section class="item" 
-            onmouseover=
-            "this.className='item rotate';
-            spins=spins+1
-            spins_span.innerHTML= spins
-            hit_spin_span.innerHTML = hits/spins.toFixed(2)
+            onmouseover="
+            if(this.className =='item') {
+            spins++;
+            spins_span.innerHTML= spins;
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half = over_half || (spins < 2*hits) && (hits < spins);
+            win_span.innerHTML = over_half;
+            }
+            this.className='item rotate';
             "
             onclick=
-            "this.className='item'
-            hits=hits+1
-            hits_span.innerHTML= hits
-            hit_spin_span.innerHTML = hits/spins.toFixed(2)
+            "this.className='item';
+            hits++;
+            hits_span.innerHTML= hits;
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half ||= (spins < 2*hits) && (hits < spins);
+            win_span.innerHTML = over_half;
             ">
         <h2>HTC</h2>
         <p>40.00</p>
@@ -87,7 +90,7 @@
         "this.className='item rotate';
         spins=spins+1
         spins_span.innerHTML= spins
-        hit_spin_span.innerHTML = hits/spins.toFixed(2)
+        hit_spin_span.innerHTML = hits/spins.toFixed(2);
          "
         onclick=
         "this.className='item'
@@ -117,29 +120,6 @@
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg" width="200" height="200">
     </section>
 </main></div>
-<script>
-    document.write(`
-    <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
-    <tbody>
-        <tr>
-            <th colspan="2">
-                <h1 id="name">
-                    Your One Stop Phone Shop - 
-                    C.C.'s
-                </h1>
-            </th>
-    </tr>
-        <tr><td>1.</td><td><br>Copyright @ Caleb Chang</td></tr>
-        <tr><td>2.</td><td>2023</td></tr>
-        <tr><td>3.</td>
-            <td>
-                11:53pm
-            </td>
-        </tr>
-    </tbody>
-</table>
-`)
-</script>
+<h1>Your One Stop Phone Shop</h1>
 </body>
-
 </html>
