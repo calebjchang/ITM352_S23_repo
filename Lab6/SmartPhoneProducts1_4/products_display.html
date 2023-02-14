@@ -39,13 +39,15 @@
             }
             this.className='item rotate';
             "
-            onclick=
-            "this.className='item';
+            onclick="
+            if(this.className =='item') {
             hits++;
             hits_span.innerHTML= hits;
             hit_spin_span.innerHTML = (hits/spins).toFixed(2);
             over_half ||= (spins < 2*hits) && (hits < spins);
-            win_span.innerHTML = over_half;
+            win_span.innerHTML = over_half;}
+            else {
+                this.className='item rotate';}
             ">
         <h2>HTC</h2>
         <p>40.00</p>
