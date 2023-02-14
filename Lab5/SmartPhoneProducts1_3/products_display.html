@@ -12,6 +12,9 @@
         var spins = 0;
          var first_name = "Caleb";
          var last_name = "Chang";
+         var initial1 = first_name.charAt(0);
+         var initial2 = last_name.charAt(0);
+        
 </script>
 </head>
 <body>
@@ -118,8 +121,7 @@
     </section>
 </main></div>
 <script>
-    now = new Date()
-    line=1
+
     document.write(`
     <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
     <tbody>
@@ -127,24 +129,24 @@
             <th colspan="2">
                 <h1 id="name">
                     Your One Stop Phone Shop - 
-                    C.C.'s
+                    ${initial1+'.'+initial2+'.'}'s
                 </h1>
             </th>
     </tr>
         <tr><td>1.</td>
             <td>
                 <br>
-                Copyright @ Caleb Chang
+                Copyright @ ${first_name+' '+last_name}
             </td>
         </tr>
         <tr><td>2.</td>
             <td>
-                2023
+                
             </td>
         </tr>
         <tr><td>3.</td>
             <td>
-                11:53pm
+                time
             </td>
         </tr>
     </tbody>
