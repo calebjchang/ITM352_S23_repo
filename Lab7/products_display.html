@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./products_data.js"></script>
+</head>
+<body>
+    <script>
+    // Define an array of products with their names and numbers
+    var num_products = 5;
+    var prod_number = 1;
+/* const products = [  
+    { number: 1, name: 'Product 1' },  
+    { number: 2, name: 'Product 2' },  
+    { number: 3, name: 'Product 3' },  
+    { number: 4, name: 'Product 4' },  
+    { number: 5, name: 'Product 5' }
+]; */
+
+// Start the HTML table and add the header row
+document.write('<table border="1">');
+document.write('<tr><th>Number</th><th>Item</th></tr>');
+
+// Loop through the products array and add a row for each product
+for (var count = 1; eval("typeof name"+ count) != 'undefined'; count++) {
+  // Use a template string to create the row HTML
+  const rowHtml = `<tr><td>${count}</td><td>${eval('name' + count)}</td></tr>`;
+  // Add the row HTML to the table using document.write()
+  document.write(rowHtml);
+}
+
+// Close the HTML table
+document.write('</table>');
+</script>
+
+        </tbody>
+
+    </table>
+</body>
+</html>
