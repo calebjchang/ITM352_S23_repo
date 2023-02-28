@@ -1,0 +1,28 @@
+div {
+    background-image: url("https://dport96.github.io/ITM352/morea/030.ui-basics/phone_globe.jpg");
+    border: 5px solid black;
+    display: flex;
+}
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+body {
+    width: 800px; margin: 0 auto;    
+}
+h1 {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+    background-color: wheat;
+}
+p {
+    background-color: white;
+    font-weight: bold;
+}
+img {
+    width: 200px;
+    height: 200px;
+}
