@@ -22,6 +22,15 @@
 </head>
 <body>
     <table style="border: 1px solid black;text-align: center;">
+        <tbody id = "tb" 
+            onclick = "
+                new_row = this.appendChild(document.createElement('tr')); 
+             for (let c = 0; c < this.rows[0].cells.length; c ++) {
+                new_cell = new_row.appendChild(document.createElement('td'));
+                new_cell.innerHTML = 'xxx';
+            }
+            "
+            >    
         <tr style="border: 1px solid black;"><th style="border: 1px solid black;">Product #</th><th>Quantity</th><th>Product</th><th>Price</th><th>Extended Price</th></tr>
         <td>
             <script>

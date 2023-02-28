@@ -22,12 +22,22 @@
 </head>
 <body>
     <table style="border: 1px solid black;text-align: center;">
+        <tbody id = "invoice_table" onclick = "
+        var new_row = this.appendChild(document.createElement('tr')); 
+
+        for (let c = 0; c < this.rows[0].cells.length; c ++) {
+        var new_cell = new_row.appendChild(document.createElement('td'));
+        new_cell.innerHTML = 'xxx';
+            }
+            "
+            >
+
         <tr style="border: 1px solid black;"><th style="border: 1px solid black;">Product #</th><th>Quantity</th><th>Product</th><th>Price</th><th>Extended Price</th></tr>
         <td>
             <script>
                 for (let i in product_quantities) {
                     document.write(`
-                    <tr style="border: 1px solid black;"><td style="border: 1px solid black;">
+                    <tr style="border: 1px solid black;"; hover {background-color:yellow;}><td style="border: 1px solid black;">
                         ${Number(i)+1}</td>
                         <td>${product_quantities[i]}</td>
                         <td>${products[i].name}</td>
@@ -36,6 +46,20 @@
                         </tr>
                     `)
                 }
-            </script>
+                
+            </script>  
 </body>
+<div>
+    <input type="button" value="Add New Row" 
+            onclick="
+                var new_row = this.appendChild(document.createElement('tr'))
+                tb = tb.createRow(tb.rows.length + 1)
+                
+            for (let c = 0; c < this.rows[0].cells.length; c ++) {
+                var new_cell = new_row.appendChild(document.createElement('td'));
+                new_cell.innerHTML = 'xxx';
+            }
+            "
+                >
+</div>
 </html>

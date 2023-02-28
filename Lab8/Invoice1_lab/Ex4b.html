@@ -22,6 +22,16 @@
 </head>
 <body>
     <table style="border: 1px solid black;text-align: center;">
+        <tbody id = "invoice_table" onclick = "
+        var new_row = this.appendChild(document.createElement('tr')); 
+
+        for (let c = 0; c < this.rows[0].cells.length; c ++) {
+        var new_cell = new_row.appendChild(document.createElement('td'));
+        new_cell.innerHTML = 'xxx';
+            }
+            "
+            >
+
         <tr style="border: 1px solid black;"><th style="border: 1px solid black;">Product #</th><th>Quantity</th><th>Product</th><th>Price</th><th>Extended Price</th></tr>
         <td>
             <script>
@@ -38,4 +48,13 @@
                 }
             </script>
 </body>
+            <div>
+                <input type="button" value="Delete Last Row" 
+            onclick="
+                var tb = document.getElementById('invoice_table');
+                tb = tb.deleteRow(tb.rows.length - 1)
+                ">
+
+            </div>
+            
 </html>
