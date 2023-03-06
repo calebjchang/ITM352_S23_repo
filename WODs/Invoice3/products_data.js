@@ -30,5 +30,5 @@ product5 = {
         image : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg",
 };
         
-products = [product1, product2, product3, product4, product5];
+var products = [product1, product2, product3, product4, product5];
 var quantities = [1, 2, 2, 1, 2];
