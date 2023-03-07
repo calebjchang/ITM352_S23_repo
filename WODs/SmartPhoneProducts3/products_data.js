@@ -31,4 +31,3 @@ product5 = {
 };
         
 products = [product1, product2, product3, product4, product5];
-var quantities = [1, 2, 2, 1, 2];
