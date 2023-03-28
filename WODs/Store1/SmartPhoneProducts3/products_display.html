@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width ,initial-scale=1.0">
+    <title>Smartphone Products</title>
+    <link rel="stylesheet" type="text/css" href="products-style.css">
+    <script src="./products_data.js"></script>
+</head>
+<form action="./invoice.html" method="GET">
+<body>
+    <h1>Caleb's Used Smart Phone Store</h1>
+    <div><main>
+<script>
+    for (i = 0; i < products.length; i++) {
+    document.write(`
+    <section class="item">
+        <h2>${products[i].brand}</h2>
+        <p>$${products[i].price}</p>
+        <img src = ${products[i].image}>
+        <p id="quantity${i}_label">Quantity Desired</p>
+        <input name="quantity${i}" type="text">
+    </section>`)
+    }
+</script>
+    
+</main></div>
+<h1>Your One Stop Phone Shop</h1>
+<footer>
+    <input type="submit" value="Purchase">
+</footer>
+</body>
+</form>
+</html>
