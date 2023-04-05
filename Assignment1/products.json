@@ -2,13 +2,13 @@
     {  
     "model": "Name",  
     "price": 0.00,  
-    "image": '',
+    "image": "/Images/iPhoneImg.jpeg",
     "quantity_available": 0
     },
     {  
     "model": "Name",  
     "price": 0.00,  
-    "image": '',
+    "image": "/Images/iPhoneImg.jpeg",
     "quantity_available": 0
     }
   ]

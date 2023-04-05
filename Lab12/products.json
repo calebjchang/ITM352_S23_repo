@@ -1,0 +1,14 @@
+[
+    {  
+    "model": "Name1",  
+    "price": 1.00,  
+    "image": "/Images/iPhoneImg.jpeg",
+    "quantity_available": 10
+    },
+    {  
+    "model": "Name2",  
+    "price": 2.00,  
+    "image": "/Images/iPhoneImg.jpeg",
+    "quantity_available": 20
+    }
+  ]
