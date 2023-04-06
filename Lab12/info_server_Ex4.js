@@ -4,10 +4,6 @@ var app = express();
 var products = require(__dirname + '/products.json');
 console.log(products);
 
-//ex4
-let brand = products[0]['brand'];
-let brand_price = products[0]['price'];
-
 // non neg function
 function isNonNegInt(q, returnErrors=false) {
 
@@ -55,7 +51,7 @@ app.post('/process_purchase', function (request, response, next) {
       return;
     }
     else {
-    response.send(`<h2>Thank you for purchasing ${q} ${brand}. Your total is \$${q * brand_price}!</h2>`);
+    response.send(`Thank you for purchasing ${q} things!`);
     } ;
     //if valid, complete purchase go to invoice
 
