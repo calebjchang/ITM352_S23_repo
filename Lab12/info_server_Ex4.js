@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+// Load my Product Data
 var products = require(__dirname + '/products.json');
 console.log(products);
 
@@ -22,7 +23,7 @@ function isNonNegInt(q, returnErrors=false) {
 //middleware
 app.use(express.urlencoded({ extended: true }));
 
-//ex4
+//ex4 micro service, ask for product_data.js, getting it from the json
 app.get("/product_data.js", function (request, response, next) {
     response.type('.js');
     var products_str = `var products = ${JSON.stringify(products)};`;
@@ -44,6 +45,12 @@ app.post('/process_purchase', function (request, response, next) {
 
     var errors = isNonNegInt(q, true);
 
+// check that they've chosen at least one selection
+    if (q > 0) {
+        has_quantities = true;
+        next;
+    };
+
     // If there are errors, send them back to the user and go back to the order page
     if (errors.length > 0) {
       response.send(`Error: ${q} is not a quantity. Hit the back button to fix..
@@ -51,7 +58,7 @@ app.post('/process_purchase', function (request, response, next) {
       return;
     }
     else {
-    response.send(`Thank you for purchasing ${q} things!`);
+    response.send(`<b>Thank you for purchasing ${q} things!</b>`);
     } ;
     //if valid, complete purchase go to invoice
 
