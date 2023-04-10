@@ -1,3 +1,6 @@
+html {
+    z-index: 1;
+}
 div {
     border: 5px solid black;
     display: flex;
@@ -8,6 +11,7 @@ main {
     justify-content: space-around;
 }
 body {
+    text-align: center;
     width: 800px; margin: 0 auto;    
 }
 h1 {
@@ -15,16 +19,30 @@ h1 {
 }
 h2 {
     text-align: center;
+    padding: 10px;
     background-color: wheat;
 }
 p {
-    background-color: white;
+    text-align: center;
     font-weight: bold;
+    z-index: 1;
 }
 img {
+    text-align: center;
     width: 200px;
     height: 200px;
+    z-index: 1;
 }
 footer {
     text-align: center;
+    z-index: 1;
 }
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 0;
+  }
+  

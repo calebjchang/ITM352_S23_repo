@@ -18,12 +18,18 @@ function isNonNegInt(q, returnErrors=false) {
    };
 
 // Determines the value in textbox, used to dynamically update the html on the page 
-// Modified from Lab11&12 with assistance from Blake Saari (S22)
+
+// Used ChatGPT to tweak the function to dynamically change properly
 function checkQuantityTextbox(qtyTextbox) {
-   errs = isNonNegInt(qtyTextbox.value, true);
-   if (errs.length == 0) errs = ['Want to purchase: '];
-   if (qtyTextbox.value.trim() == '') errs = ['Type desired quantity: '];
-   document.getElementById(qtyTextbox.name + '_label').innerHTML = errs.join('<font color="red">, </font>');
+   const qtyAva = parseInt(qtyTextbox.dataset.qtyAva); // Get available quantity from dataset
+   const qty = parseInt(qtyTextbox.value); // Get entered quantity
+   const errorSpan = document.getElementById(qtyTextbox.id + "_errors");
+   if (qty > qtyAva) { // Check if entered quantity exceeds available quantity
+     errorSpan.innerHTML = `We don't have ${qty} available`;
+     qtyTextbox.value = qtyAva; // Set textbox value to available quantity
+   } else { // Clear error message if quantity is valid
+     errorSpan.innerHTML = "";
+   }
 };
 
 // Middleware from Lab12
@@ -63,7 +69,7 @@ for (let i in products) {
       
    }
    // Using isNonNegInt to validate values
-   if(isNonNegInt(q,false) == false) {
+   if(isNonNegInt(q) == false) {
        errors['quantity_error'+i] = isNonNegInt(q,true);
    }
 // IR3 & Checking stock validity 
