@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width ,initial-scale=1.0">
     <title>Smartphone Products</title>
     <link rel="stylesheet" type="text/css" href="products-style.css">
-    <script src="./products.js" type="text/javascript"></script>
+    <script src="./products.js" type="text/javascript">
+    </script>
 </head>
-<form action="./invoice.html" method="get">
+<form action="/purchase" method="post">
 <body>
     <h1>NewJeans Album Store</h1>
     <div><main>
@@ -20,8 +21,8 @@
         <p>$${products[i].price}</p>
         <img src = ${products[i].image}>
         <p id="quantity${i}_label">Quantity Desired</p>
-        <p>Quantity Available: ${products[i].quantity_available} </p>
-        <input name="quantity${i}" id="quantity_textbox${i}" type="text">
+        <p>Quantity Available: ${products[i].qty_ava} </p>
+        <input type="text" name="quantity${i}">
     </section>`)
     }
 </script>
@@ -29,7 +30,7 @@
 </main></div>
 <h1>Your One Stop Album Shop</h1>
 <footer>
-    <input type="submit" value="Purchase">
+    <input id="purchase_button" type="submit" value="Purchase" name="purchase_submit" onclick="">
 </footer>
 </body>
 </form>

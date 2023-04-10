@@ -3,30 +3,30 @@
     "name": "NewJeans BlueBook Group Vers.",  
     "price": 24.00,  
     "image": "/Images/NJ_BB_grp.jpeg",
-    "quantity_available": 10
+    "qty_ava": 10
     },
     {  
     "name": "NewJeans OMG Full Set Vers.",  
     "price": 145.00,  
     "image": "/Images/NJ_OMG_grp.jpeg",
-    "quantity_available": 10
+    "qty_ava": 10
     },
     {  
     "name": "Name3",  
     "price": 3.00,  
     "image": "/Images/NJ_BB_grp.jpeg",
-    "quantity_available": 10
+    "qty_ava": 10
     },
     {  
     "name": "Name4",  
     "price": 4.00,  
     "image": "/Images/NJ_BB_grp.jpeg",
-    "quantity_available": 10
+    "qty_ava": 10
     },
     {  
     "name": "Name5",  
     "price": 5.00,  
     "image": "/Images/NJ_BB_grp.jpeg",
-    "quantity_available": 10
+    "qty_ava": 10
     }
   ]

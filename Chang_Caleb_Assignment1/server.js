@@ -1,3 +1,7 @@
+// Load in query string, product data, and express
+
+var products = require(__dirname + '/products.json');
+console.log(products);
 var express = require('express');
 var app = express();
 
@@ -15,10 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Determine input in the textbox
 
-// Load my Product Data
-var products = require(__dirname + '/products.json');
-console.log(products);
-
 // monitor all requests
 app.all('*', function (request, response, next) {
    console.log(request.method + ' to ' + request.path);
@@ -33,19 +33,19 @@ app.get("/products.js", function(request, response, next)
             response.send(products_str);
         });
 
-// process purchase request (validate quantities, check quantity available) (MAY HAVE TO CHANGE "process_purchase")
+// process purchase request (validate quantities, check quantity available)
 app.post('/purchase', function (request, response, next) {
-//Receive data from textboxes and log
+   //Receive data from textboxes and log
    console.log(request.body);
 
-// Validation based on Branson Suzuki's (F22) server.js
-   var q;
+// Using isNonNegInt to validate my quantities, setting vars to check
+   var q
    var has_quantities = false;
    var errors = {};
 
 for (let i in products) {
 // check that they've chosen at least one selection
-var q = request.body[`quantity_textbox`];
+var q = request.body['quantity' + i];
  if (q > 0) {
        has_quantities = true;
        next;
