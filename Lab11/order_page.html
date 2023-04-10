@@ -22,7 +22,7 @@
         };
         if(params.has('qty_textbox')) { 
             window.onload = function displayPurchase(){
-            // Is the quanity valid? If so, print purchase. If not, give error.
+            // Is the quantity valid? If so, print purchase. If not, give error.
             if(IsNonNegInt(params.get('qty_textbox'))) {
                 document.body.innerHTML = `Thank you for ordering ${params.get('qty_textbox')} items`;
             } else {
