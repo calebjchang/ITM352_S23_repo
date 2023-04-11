@@ -68,6 +68,9 @@ img {
     width: 125px;
     height: 125px;
     z-index: 1;
+    border-style: solid;
+    border-width: medium;
+    border-color: aliceblue;
 }
 footer {
     text-align: center;
