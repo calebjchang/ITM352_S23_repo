@@ -1,0 +1,32 @@
+[
+    {  
+    "name": "NewJeans BlueBook Group Version",  
+    "price": 24.00,  
+    "image": "/Images/NJ_BB_grp.jpeg",
+    "qty_ava": 20
+    },
+    {  
+    "name": "NewJeans OMG Full Set Version",  
+    "price": 145.00,  
+    "image": "/Images/NJ_OMG_grp.jpeg",
+    "qty_ava": 25
+    },
+    {  
+    "name": "NewJeans OMG Album Weverse Version",  
+    "price": 16.00,  
+    "image": "/Images/NJ_Weverse_OMG.jpeg",
+    "qty_ava": 35
+    },
+    {  
+    "name": "NewJeans 2023 Season's Greetings",  
+    "price": 68.00,  
+    "image": "/Images/NJ_Room722_SG23.png",
+    "qty_ava": 45
+    },
+    {  
+    "name": "NewJeans 1st EP NewJeans Bag",  
+    "price": 45.00,  
+    "image": "/Images/NJ_EP1_White_Bag.png",
+    "qty_ava": 50
+    }
+  ]
