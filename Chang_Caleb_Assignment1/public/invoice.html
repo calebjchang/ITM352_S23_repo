@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>NewJeans</title>
     <link rel="stylesheet" type="text/css" href="invoice-style.css">
-
+    <!--NJ logo favicon-->
+    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
     <script src="./products.js" type="text/javascript"></script>
     <script>
-      // Almost all of the below code is pulled from Store1 WOD with minor changes.
+      // Nearly all of the below code is pulled from Store1/Invoice3 WOD with minor changes made to accomodate CSS and new data.
       //query string params from products_display.html
       let params = (new URL(document.location)).searchParams;
       quantities = [];
@@ -20,7 +21,7 @@
       let quantity = params.get(`quantity${i}`);
       quantities.push(quantity);
     };
-// Function used to generate the invoice table
+// Function used to generate the invoice table dynamically.
       function generate_item_rows(products_quantities_array){
         for (let i in products_quantities_array){
           let extended_price = products_quantities_array[i] * products[i].price; 
@@ -49,7 +50,7 @@
           subtotal += extended_price;
       };
     };
-// Declared function from Invoice3 to check for invalid quantities after the page was loaded.
+// Declare a function to check for invalid quantities after the page was loaded.
     function IsNonNegInt(q, returnErrors=false) {
         errors = []; // assume no errors at first
         if(Number(q) != q) errors.push('Not a number!'); // Check if string is a number value

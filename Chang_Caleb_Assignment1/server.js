@@ -1,6 +1,7 @@
-//Based upon Branson Suzuki's (F22) server.js
+// Created by Caleb Chang
+// Server.js used to validate data inputted in the webstore, and path to either an error message on the same page or redirect to the invoice page
 
-// Declare/get query string, load product data and express
+// Declare/get query string as qs to be used later, load product data and express
 const qs = require('node:querystring');
 var products = require(__dirname + '/products.json');
 console.log(products);
@@ -17,18 +18,25 @@ function isNonNegInt(q, returnErrors=false) {
    return (returnErrors ? errors : (errors.length == 0));
    };
 
-// Determines the value in textbox, used to dynamically update the html on the page 
-
-// Used ChatGPT to tweak the function to dynamically change properly
+// Created function used to check input in the textbox and add an error message below in real time.
+// Used assistance from ChatGPT to tweak the below function from Lab 12 (lines 23 - 41) to dynamically change my error message, as well as match IR3's criteria (red border color, error msg, & replacing input value to the qty_available)
 function checkQuantityTextbox(qtyTextbox) {
    const qtyAva = parseInt(qtyTextbox.dataset.qtyAva); // Get available quantity from dataset
    const qty = parseInt(qtyTextbox.value); // Get entered quantity
    const errorSpan = document.getElementById(qtyTextbox.id + "_errors");
-   if (qty > qtyAva) { // Check if entered quantity exceeds available quantity
+   // Check if entered quantity exceeds available quantity
+   if (qty > qtyAva) { 
+    // Changes the error message to the following
      errorSpan.innerHTML = `We don't have ${qty} available`;
-     qtyTextbox.value = qtyAva; // Set textbox value to available quantity
-   } else { // Clear error message if quantity is valid
+     // Sets textbox value to available quantity
+     qtyTextbox.value = qtyAva; 
+     // Changes textbox border color to red when value is > qtyAva
+     qtyTextbox.style.borderColor = "red"; 
+   } 
+   // Clears error message and changes border color back to default
+   else { 
      errorSpan.innerHTML = "";
+     qtyTextbox.style.borderColor = "";
    }
 };
 
@@ -51,10 +59,11 @@ app.get("/products.js", function(request, response, next)
 
 // process purchase request (validate quantities, check quantity available)
 app.post('/purchase', function (request, response, next) {
-   //Receive data from textboxes and log
-   console.log(request.body);
+//Receive data from textboxes and log
+console.log(request.body);
 
-// Using isNonNegInt to validate my quantities
+// Below code (lines 67 - 103) based on Branson Suzuki's (F22) server.js 
+// Declaring q as a empty variable, setting the has_quantity default to false (eg. quantities haven't been entered yet), and an empty errors object.
    var q
    var has_quantity = false;
    var errors = {};
@@ -66,25 +75,24 @@ for (let i in products) {
    // Check that there were quantities inputted
    if(q > 0) {
       has_quantity = true;
-      
    }
    // Using isNonNegInt to validate values
    if(isNonNegInt(q) == false) {
        errors['quantity_error'+i] = isNonNegInt(q,true);
    }
-// IR3 & Checking stock validity 
+// Checking stock validity, (created pre - IR3 code, as the IR3 code blocks the user from sending in a quantity larger than the qty_available, but still functions properly)
    if (q > products[i].qty_ava) {  
        errors['stock_outage' + i ] = `We currently don't have ${(q)} ${products[i].name}s. Please check back later!`
    }
 }
 }
-// This code is to print out an error stating that the user needs to select quantites instead of leaving it blank
+// Prints an error telling the user to select an item to purchase; when the user hasn't input any values.
 if(has_quantity == false) {
 errors['no_selections_error'] = "Please select some items to purchase!";
 }
-// This code is for when there are no errors and will move the user on towards the invoice.html file I have instead of directing them back to products display (like when we do have an error)
+// If all selected quantities are valid, and at least one selection is made without errors, redirect to the invoice.html file, and in all other cases it will stay on the store page.
 if (Object.keys(errors).length == 0) {
-//If quantities are valid, remove quantities from the quantity available.
+// If the selected quantities are valid, it will take the quantity purchased out of the quantity available.
 for(let i in products){
    products[i].qty_ava -= Number(request.body['quantity' + i]);
 }
@@ -94,7 +102,6 @@ response.redirect("./products_display.html?" +  qs.stringify(request.body) + '&'
 }
 });
 
-// IR3:
 
 // route all other GET requests to files in public 
 app.use(express.static(__dirname + '/public'));
