@@ -35,7 +35,7 @@ app.get("/login", function (request, response) {
     `;
     response.send(str);
  });
-
+/* EX 3
 app.post("/login", function (request, response) {
     // Process login form POST and redirect to logged in page if ok, back to login page if not
     console.log(request.body);
@@ -56,7 +56,52 @@ app.post("/login", function (request, response) {
     } else {
         response.send(`${username} does not exist.`)
     }
+}); */
 
+app.post("/login", function (request, response) {
+    // Process login form POST and redirect to logged in page if ok, back to login page if not
+    let login_username = request.body['username'] // check if username exists, then check password entered matches password stored
+    let login_password = request.body['password']
+    if (typeof user_data[login_username] != 'undefined') {
+        if (user_data[login_username]["password"] == login_password) { // getting the stored password and matching against login_password
+            response.send(`${login_username} is logged in`)
+        } else {
+            response.redirect(`./login?err=incorrect password for ${login_username}`);
+        } 
+    } else {
+            response.send(`${login_username} does not exist`)
+        }
+    response.send('processing login' + JSON.stringify(request.body));
 });
+
+
+app.get("/register", function (request, response) {
+    // Give a simple register form
+    str = `
+<body>
+<form action="" method="POST">
+<input type="text" name="username" size="40" placeholder="enter username" ><br/>
+<input type="password" name="password" size="40" placeholder="enter password"><br/>
+<input type="password" name="repeat_password" size="40" placeholder="enter password again"><br/>
+<input type="email" name="email" size="40" placeholder="enter email"><br/>
+<input type="submit" value="Submit" id="submit">
+</form>
+</body>
+    `;
+    response.send(str);
+ });
+
+ app.post('/process_register', function (request, response) {
+   //add a new user to the DB
+   username = request.body["uname"];
+   user_data[username] = {};
+   user_data[username]["name"] = request.body["name"];
+   user_data[username]["password"] = request.body["psw"];
+   user_data[username]["email"] = request.body["email"];
+     //save updated user_data to file(DB)
+   fs.writeFileSync(user_data_file, JSON.stringify(user_data));
+   response.send(`${username} is registered`);
+});
+
 
 app.listen(8080, () => console.log(`listening on port 8080`));
