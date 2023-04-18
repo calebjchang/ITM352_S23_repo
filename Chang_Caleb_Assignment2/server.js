@@ -1,13 +1,22 @@
-// Created by Caleb Chang
-// Server.js used to validate data inputted in the webstore, and path to either an error message on the same page or redirect to the invoice page
+// Author: Caleb Chang
+// Server used to validate data inputted in the webstore, and path to either an error message on the same page or redirect to the invoice page.
+// Updated to include a login, registration, and profile edit page
 
 // Declare/get query string as qs to be used later, load product data and express
 const qs = require('node:querystring');
 var products = require(__dirname + '/products.json');
-console.log(products);
+const { URLSearchParams } = require('url');
+
 const { query } = require('express');
 var express = require('express');
 var app = express();
+//store data from purchase
+var qty_obj = {};
+// Load File System Package
+var fs = require('fs')
+
+// Load User Data
+var filename = 'user_data.json';
 
 // Non Negative Integer function, used later to determine validity, (If q is "")
 function isNonNegInt(q, returnErrors=false) {
@@ -57,6 +66,7 @@ app.get("/products.js", function(request, response, next)
             response.send(products_str);
         });
 
+// ---------------------- Purchase ----------------------//
 // process purchase request (validate quantities, check quantity available)
 app.post('/purchase', function (request, response, next) {
 //Receive data from textboxes and log
@@ -93,14 +103,74 @@ errors['no_selections_error'] = "Please select some items to purchase!";
 // If all selected quantities are valid, and at least one selection is made without errors, redirect to the invoice.html file, and in all other cases it will stay on the store page.
 if (Object.keys(errors).length == 0) {
 // If the selected quantities are valid, it will take the quantity purchased out of the quantity available.
-for(let i in products){
+for(let i in products) {
    products[i].qty_ava -= Number(request.body['quantity' + i]);
 }
-response.redirect("./invoice.html?" + qs.stringify(request.body));
+// store quantities in qty_obj
+let qty_obj = qs.stringify(request.body);
+// Redirect to login page before pathing to invoice
+response.redirect("./login.html?" + qs.stringify(request.body));
+
 } else {
 response.redirect("./products_display.html?" +  qs.stringify(request.body) + '&' + qs.stringify(errors));
 }
 });
+
+// Lines 108 - xxx based on Blake Saari's (S22) server.js 
+// --------------------------- Log-in --------------------------- //
+
+// Example from Lab 13
+if (fs.existsSync(filename)) {
+   var user_data = "./user_data.json"
+   var data_str = fs.readFileSync(filename, 'utf-8');
+   var user_str = JSON.parse(data_str);
+}
+else {
+   console.log(filename + ' does not exist.');
+}
+
+// Process the login request
+   // Process login form POST and redirect to logged in page if ok, back to login page if not
+   app.post("/login", function (request, response) {
+
+       // Start with no errors
+       var errors = {};
+
+       // Declare variables for the inputs from the login form
+       var the_email = request.body['email'].toLowerCase();
+       var the_password = request.body['password'];
+
+       // Check if password entered matches password store in JSON
+       if (typeof user_str[the_email] != 'undefined') {
+           if (user_str[the_email].password == the_password) {
+               // If the passwords match...
+               qty_obj['email'] = the_email;
+               qty_obj['fullname'] = user_str[the_email].name;
+               // Store quantity data     
+               let params = new URLSearchParams(qty_obj);
+               console.log(qty_obj)
+               // If no errors, redirect to invoice page with quantity data
+               response.redirect('./invoice.html?' + params.toString());
+               return;
+           // If password incorrect add to errors variable
+           } else {
+               errors['login_error'] = `Incorrect password`;
+           }
+           // If email incorrect add to errors variable                
+           } else {
+               errors['login_error'] = `Wrong E-Mail`;
+           }
+           // If errors exist, redirect to login page with errors in string
+           let params = new URLSearchParams(errors);
+           params.append('email', the_email);
+           response.redirect('./login.html?' + params.toString());
+       }
+   );
+
+// ---------------------------  Register --------------------------- //
+
+
+// --------------------------- Change Registration Details --------------------------- //
 
 
 // route all other GET requests to files in public 

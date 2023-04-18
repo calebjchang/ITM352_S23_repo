@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>NewJeans</title>
-    <link rel="stylesheet" type="text/css" href="invoice-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/invoice-style.css">
     <!--NJ logo favicon-->
     <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
     <script src="./products.js" type="text/javascript"></script>
@@ -16,7 +16,9 @@
       //query string params from products_display.html
       let params = (new URL(document.location)).searchParams;
       quantities = [];
-
+      if (params.has("quantity")) {
+        quantities = JSON.parse(params.get(`quantity`));
+      };
     for (let i = 0; i < products.length; i++) {
       let quantity = params.get(`quantity${i}`);
       quantities.push(quantity);
@@ -51,11 +53,11 @@
       };
     };
 // Declare a function to check for invalid quantities after the page was loaded.
-    function IsNonNegInt(q, returnErrors=false) {
+    function IsNonNegInt(i, returnErrors=false) {
         errors = []; // assume no errors at first
-        if(Number(q) != q) errors.push('Not a number!'); // Check if string is a number value
-        if(q < 0) errors.push('Negative value!'); // Check if it is non-negative
-        if(parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
+        if(Number(i) != i) errors.push('Not a number!'); // Check if string is a number value
+        if(i < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if(parseInt(i) != i) errors.push('Not an integer!'); // Check that it is an integer
         return (returnErrors ? errors : (errors.length == 0));
     };
 
