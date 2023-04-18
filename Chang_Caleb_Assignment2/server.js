@@ -1,22 +1,27 @@
 // Author: Caleb Chang
 // Server used to validate data inputted in the webstore, and path to either an error message on the same page or redirect to the invoice page.
 // Updated to include a login, registration, and profile edit page
+// Based on Branson Suzuki's (F22) server.js
 
-// Declare/get query string as qs to be used later, load product data and express
-const qs = require('node:querystring');
-var products = require(__dirname + '/products.json');
-const { URLSearchParams } = require('url');
-
-const { query } = require('express');
+//Load in query string, product info, and express package, cookie parser and session middleware, and user information
 var express = require('express');
 var app = express();
-//store data from purchase
-var qty_obj = {};
-// Load File System Package
 var fs = require('fs')
 
-// Load User Data
-var filename = 'user_data.json';
+const qs = require('querystring');
+const { query } = require('express');
+const { response } = require('express');
+const { URLSearchParam } = require('url');
+
+var products = require(__dirname + '/products.json');
+
+//variable to store user data 
+var user_data = './user_data.json';
+
+var qty_obj = {};
+
+app.use(express.urlencoded({ extended: true }));
+
 
 // Non Negative Integer function, used later to determine validity, (If q is "")
 function isNonNegInt(q, returnErrors=false) {
@@ -48,9 +53,6 @@ function checkQuantityTextbox(qtyTextbox) {
      qtyTextbox.style.borderColor = "";
    }
 };
-
-// Middleware from Lab12
-app.use(express.urlencoded({ extended: true }));
 
 // Monitor all requests
 app.all('*', function (request, response, next) {
@@ -100,6 +102,7 @@ for (let i in products) {
 if(has_quantity == false) {
 errors['no_selections_error'] = "Please select some items to purchase!";
 }
+let quantity_object = qs.stringify(request.body);
 // If all selected quantities are valid, and at least one selection is made without errors, redirect to the invoice.html file, and in all other cases it will stay on the store page.
 if (Object.keys(errors).length == 0) {
 // If the selected quantities are valid, it will take the quantity purchased out of the quantity available.
@@ -107,27 +110,27 @@ for(let i in products) {
    products[i].qty_ava -= Number(request.body['quantity' + i]);
 }
 // store quantities in qty_obj
-let qty_obj = qs.stringify(request.body);
+qty_obj = quantity_object;
 // Redirect to login page before pathing to invoice
-response.redirect("./login.html?" + qs.stringify(request.body));
+response.redirect("./login.html?");
 
 } else {
 response.redirect("./products_display.html?" +  qs.stringify(request.body) + '&' + qs.stringify(errors));
 }
 });
 
-// Lines 108 - xxx based on Blake Saari's (S22) server.js 
+
 // --------------------------- Log-in --------------------------- //
 
 // Example from Lab 13
-if (fs.existsSync(filename)) {
+if (fs.existsSync(user_data)) {
    var user_data = "./user_data.json"
-   var data_str = fs.readFileSync(filename, 'utf-8');
+   var data_str = fs.readFileSync(user_data, 'utf-8');
    var user_str = JSON.parse(data_str);
 }
 else {
-   console.log(filename + ' does not exist.');
-}
+   console.log(user_data + ' does not exist.');
+};
 
 // Process the login request
    // Process login form POST and redirect to logged in page if ok, back to login page if not
@@ -138,6 +141,8 @@ else {
 
        // Declare variables for the inputs from the login form
        var the_email = request.body['email'].toLowerCase();
+       // save username in case of password change
+       logged_in = the_email
        var the_password = request.body['password'];
 
        // Check if password entered matches password store in JSON

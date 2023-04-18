@@ -19,6 +19,8 @@
       if (params.has("quantity")) {
         quantities = JSON.parse(params.get(`quantity`));
       };
+
+ 
     for (let i = 0; i < products.length; i++) {
       let quantity = params.get(`quantity${i}`);
       quantities.push(quantity);
