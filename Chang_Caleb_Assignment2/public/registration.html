@@ -10,8 +10,77 @@
     <link rel="stylesheet" type="text/css" href="./css/registration.css">
     <!--NJ logo favicon-->
     <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
+    <script>
+      /*
+      // Load errors onload, Based on Blake Saari S22
+      window.onload = function () {
+          let params = (new URL(document.location)).searchParams;
+              if (params.has('email')) {
+                  email.value = params.get('email')
+              }
+              if (params.has('reset_errors')) {
+                  var errors = JSON.parse(params.get('registration_errors'));
+                  let errors_string = '';
+                  for (err in errors) {
+                      errors_string += errors[err] + '\n';
+                      document.getElementById(`${err}_label`).innerHTML = `<font color="red">${errors[err]}</font>`;
+                  }
+                  alert(errors_string);
+              }
+      }*/
+  </script>
 </head>
 <body>
-    
+  <!-- Page Header-->
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>newjeans_official</h1>      
+      <p><strong></strong></p>
+    </div>
+  </div>
+  
+<!-- Navigation Bar (can probably omit)-->
+     <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="./index.html">newjeans_official</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="./index.html">home</a></li>
+              <li><a href="./products_display.html">newjeans.store</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./update.html">your account</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</head>
+<body>
+
+    <form name='register' action="/registration" method="POST">
+        <ul id = 'register_form'>
+            <li><label for="email">Email:</label></li>
+            <li><input type="text" name="email" size="50" /></li>
+            <label class="form-label" id="email_label" for="email"></label>
+            <li><label for="fullname">Name:</label></li>
+            <li><input type="text" name="fullname" size="50" /></li>
+            <label class="form-label" id="fullname_label" for="fullname"></label>
+            <li><label for="passid">Password:</label></li>
+            <li><input type="password" name="password" size="50" /></li>
+            <label class="form-label" id="password_label" for="password"></label>
+            <li><label for="passid">Repeat password:</label></li>
+            <li><input type="password" name="repeat_password" size="50" /></li>
+            <label class="form-label" id="repeat_password_label" for="repeat_password"></label>
+            <li><input type="submit" name="submit" value="Register" action="/registration" method="POST"></li>
+        </ul>
+    </form>
+
 </body>
 </html>

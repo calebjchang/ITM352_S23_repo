@@ -1,0 +1,105 @@
+<!-- Created by: Blake Saari -->
+<!-- Utilizing Web3/Bootstrap/OnlineStore Template -->
+<!-- This page serves as a place for users to edit their login credentials -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Load Favicon-->
+<link rel="shortcut icon" href="./images/favicon.ico">
+
+<script>
+    window.onload = function () {
+        let params = (new URL(document.location)).searchParams;
+        // Alert if errors exist (Taken from Momoko Michimoto F21)
+            if (params.has('email')) {
+                email.value = params.get('email')
+            }
+            if (params.has('reset_errors')) {
+                var errors = JSON.parse(params.get('reset_errors'));
+                let errors_string = '';
+                for (err in errors) {
+                    errors_string += errors[err] + '\n';
+                    document.getElementById(`${err}_label`).innerHTML = `<font color="red">${errors[err]}</font>`;
+                }
+                alert(errors_string);
+            }
+    }
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- Load in Cascading Style Sheets -->
+    <link rel="stylesheet" href="/css/product-style.css">
+  
+  </head>
+  <body>
+  
+  <!-- Page Header-->
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>THE MEAT LOCKER</h1>      
+      <p><strong>High Quality U.S.D.A. Prime Beef</strong></p>
+    </div>
+  </div>
+  
+   <!-- Navigation Bar -->
+   <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="./index.html">Meat Locker</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="./index.html">Home</a></li>
+          <li><a href="./products_display.html">Products</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="./update.html"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <form name = "change_password" action="./change_password" method="POST">
+
+        <h2>Change your log-in credentials</h2>
+
+        <div>
+        <input placeholder="E-mail" type="email" name="email" id="email">
+        <label class="form-label" id="email_label" for="email"></label>
+        </div>
+
+        <div>
+        <input placeholder="Password" type="password" name="password" id="password">
+        <label class="form-label" id="password_label" for="password"></label>
+        </div>
+
+        
+        <div>
+        <input placeholder="Enter new password" type="password" name="newpassword" id="newpassword">
+        <label class="form-label" id="newpassword_label" for="newpassword"></label>
+        </div>
+
+        <div>
+        <input placeholder="Repeat new password" type="password" name="repeatnewpassword" id="repeatnewpassword">
+        <label class="form-label" id="repeatnewpassword_label" for="repeatnewpassword"></label>
+        </div>
+
+        <div>
+            <button type="submit" id="change_password" name="change_password" onclick="">Change Password</button>
+        </div>
+
+    </form>
+</body>
+</html>

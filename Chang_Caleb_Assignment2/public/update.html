@@ -10,8 +10,83 @@
     <link rel="stylesheet" type="text/css" href="./css/update.css">
     <!--NJ logo favicon-->
     <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
+    <script>
+      // Load errors onload, Based on Blake Saari S22
+      window.onload = function () {
+          let params = (new URL(document.location)).searchParams;
+              if (params.has('email')) {
+                  email.value = params.get('email')
+              }
+              if (params.has('reset_errors')) {
+                  var errors = JSON.parse(params.get('reset_errors'));
+                  let errors_string = '';
+                  for (err in errors) {
+                      errors_string += errors[err] + '\n';
+                      document.getElementById(`${err}_label`).innerHTML = `<font color="red">${errors[err]}</font>`;
+                  }
+                  alert(errors_string);
+              }
+      }
+  </script>
 </head>
 <body>
+  
+    <!-- Page Header-->
+        <h1>newjeans_official</h1>      
+        <p><strong>hope you're enjoying the site!</strong></p>
     
-</body>
+     <!-- Navigation Bar (can probably omit)-->
+     <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="./index.html">newjeans_official</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./index.html">home</a></li>
+            <li><a href="./products_display.html">newjeans.store</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="./update.html">your account</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+      <form name = "change_password" action="./change_password" method="POST">
+  
+          <h2>Change your log-in credentials</h2>
+  
+          <div>
+          <input placeholder="E-mail" type="email" name="email" id="email">
+          <label class="form-label" id="email_label" for="email"></label>
+          </div>
+  
+          <div>
+          <input placeholder="Password" type="password" name="password" id="password">
+          <label class="form-label" id="password_label" for="password"></label>
+          </div>
+  
+          
+          <div>
+          <input placeholder="Enter new password" type="password" name="newpassword" id="newpassword">
+          <label class="form-label" id="newpassword_label" for="newpassword"></label>
+          </div>
+  
+          <div>
+          <input placeholder="Repeat new password" type="password" name="repeatnewpassword" id="repeatnewpassword">
+          <label class="form-label" id="repeatnewpassword_label" for="repeatnewpassword"></label>
+          </div>
+  
+          <div>
+              <button type="submit" id="change_password" name="change_password" onclick="">Change Password</button>
+          </div>
+  
+      </form>
+  </body>
 </html>

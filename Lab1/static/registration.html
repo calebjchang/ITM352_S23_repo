@@ -1,0 +1,76 @@
+<!-- Created by: Blake Saari -->
+<!-- Utilizing Web3/Bootstrap/OnlineStore Template -->
+<!-- This page serves as a registration page to create a new user -->
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="./css/register-style.css">    
+<script src="scripts/email.js"></script>
+
+<head>
+    <!-- Load Favicon-->
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- Load in Cascading Style Sheets -->
+    <link rel="stylesheet" href="/css/register-style.css">
+  
+  </head>
+  <body>
+  
+  <!-- Page Header-->
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>THE MEAT LOCKER</h1>      
+      <p><strong>High Quality U.S.D.A. Prime Beef</strong></p>
+    </div>
+  </div>
+  
+   <!-- Navigation Bar -->
+   <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="./index.html">Meat Locker</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="./index.html">Home</a></li>
+          <li><a href="./products_display.html">Products</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="./update.html"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</head>
+<body>
+
+    <form name='register' action="/registration" method="POST">
+        <ul id = 'register_form'>
+            <li><label for="email">Email:</label></li>
+            <li><input type="text" name="email" size="50" /></li>
+            <li><label for="fullname">Name:</label></li>
+            <li><input type="text" name="fullname" size="50" /></li>
+            <li><label for="passid">Password:</label></li>
+            <li><input type="password" name="password" size="50" /></li>
+            <li><label for="passid">Repeat password:</label></li>
+            <li><input type="password" name="repeat_password" size="50" /></li>
+            <li><input type="submit" name="submit" value="Submit" action="/registration" method="POST"></li>
+        </ul>
+    </form>
+
+</body>
+</html>
