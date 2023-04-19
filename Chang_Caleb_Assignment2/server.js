@@ -12,7 +12,8 @@ const qs = require('querystring');
 const { query } = require('express');
 const { response } = require('express');
 const { URLSearchParam } = require('url');
-
+// IR1
+const crypto = require('crypto');
 var products = require(__dirname + '/products.json');
 
 //variable to store user data 
@@ -121,7 +122,7 @@ response.redirect("./products_display.html?" +  qs.stringify(request.body) + '&'
 
 
 // --------------------------- Log-in --------------------------- //
-// Based on Blake Saari's (S2) server.js | Store user data to send to the invoice somehow
+// Based on Blake Saari's (S2) server.js 
 // Example from Lab 13
 if (fs.existsSync(user_data)) {
    var user_data = "./user_data.json"
@@ -172,7 +173,7 @@ else {
        }
    );
 
-// ---------------------------  Register --------------------------- //
+// ---------------------------  Registration --------------------------- //
 // Based on Blake Saari's (S2) server.js
 // Error messages and alert not displaying, fixable, made quantities pass through by pathing to login then to invoice
 
@@ -215,7 +216,6 @@ app.post("/registration", function (request, response) {
    if (request.body['fullname'].length > 30) {
        registration_errors['fullname'] = `Please enter a name less than 30 characters`;
    }
-
        // Assignment 2 Example Code -- Reading and writing user info to a JSON file
            // If there are no errors...
            if(Object.keys(registration_errors).length == 0) {
