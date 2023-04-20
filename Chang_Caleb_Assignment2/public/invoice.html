@@ -67,7 +67,19 @@
     </script>
 </head>
 <body>
-  <h2>Thank you for your order! Your estimated shipping time will be 3-10 business days!</h2>
+        <script>
+          // Invoice prints here
+          // If there are no quantities passed, print this instead of the invoice.
+          if (quantities.every(value => value == null)) {
+            document.write(`Hey (fullname), click here to check out the store!
+            <hr>
+            <a href="products_display.html">
+            <img src="/Images/rabbit_white.png" width="200px" height="200px">
+            </a>
+        `);
+          } else {
+            document.write(`
+            <h2>Thank you for your order! Your estimated shipping time will be 3-10 business days!</h2>
     <table border="1">
         <tbody>
           <tr>
@@ -76,9 +88,8 @@
             <th style="text-align: center;" width="13%">price</th>
             <th style="text-align: center;" width="54%">extended price</th>
           </tr>
-        <script>
-          // Invoice prints here
-          generate_item_rows(quantities);
+            `);
+            generate_item_rows(quantities);
           //Compute tax
            var tax = subtotal*0.0575;
           //Compute Shipping
@@ -93,35 +104,31 @@
              };
         //Compute grand total
         var total = subtotal+tax+shipping;
-        
-        </script>
-          <tr>
+        document.write(`
+        <tr>
             <td colspan="4" width="100%">&nbsp;</td>
           </tr>
           <tr>
             <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
-            <td width="54%">$<script>
-    document.write(subtotal.toFixed(2));
-            </script>
+            <td width="54%">$
+                ${subtotal.toFixed(2)}
             </td>
           </tr>
           <tr>
             <td style="text-align: center;" colspan="3" width="67%"><span>Tax @ 5.75%</span></td>
-            <td width="54%">$<script>
-                document.write(tax.toFixed(2));
-                        </script>
+            <td width="54%">$
+                ${tax.toFixed(2)}
           </tr>
           <tr>
             <td style="text-align: center;" colspan="3" width="67%"><span>Shipping</span></td>
-            <td width="54%">$<script>
-                document.write(shipping.toFixed(2));
-                        </script>
+            <td width="54%">$
+                ${shipping.toFixed(2)}
           </tr>
           <tr>
             <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
-            <td width="54%"><strong>$<script>
-                document.write(total.toFixed(2));
-                        </script></strong></td>
+            <td width="54%"><strong>$
+                ${total.toFixed(2)}
+                        </strong></td>
           </tr>
         </tbody>
       </table>
@@ -136,6 +143,7 @@
     <p>
         <a href="products_display.html">
             <img src="/Images/rabbit_white.png" width="200px" height="200px">
-        </a>
-
+        </a>`)
+          };     
+    </script>   
 </html>

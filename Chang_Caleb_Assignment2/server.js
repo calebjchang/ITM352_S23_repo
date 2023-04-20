@@ -12,8 +12,11 @@ const qs = require('querystring');
 const { query } = require('express');
 const { response } = require('express');
 const { URLSearchParam } = require('url');
-// IR1
+
+// IR1 crypt librarys
 const crypto = require('crypto');
+var bcrypt = require('bcrypt');
+
 var products = require(__dirname + '/products.json');
 
 //variable to store user data 
@@ -75,6 +78,9 @@ app.post('/purchase', function (request, response, next) {
 //Receive data from textboxes and log
 console.log(request.body);
 
+// Quantities array to hold my quantites to take to login
+var quantities = [];
+quantities = request.body;
 // Below code (lines 67 - 103) based on Branson Suzuki's (F22) server.js 
 // Declaring q as a empty variable, setting the has_quantity default to false (eg. quantities haven't been entered yet), and an empty errors object.
    var q
@@ -106,10 +112,11 @@ errors['no_selections_error'] = "Please select some items to purchase!";
 let quantity_object = qs.stringify(request.body);
 // If all selected quantities are valid, and at least one selection is made without errors, redirect to the invoice.html file, and in all other cases it will stay on the store page.
 if (Object.keys(errors).length == 0) {
-// If the selected quantities are valid, it will take the quantity purchased out of the quantity available.
+// Take the quantity purchased out of the quantity available before pathing to invoice
 for(let i in products) {
-   products[i].qty_ava -= Number(request.body['quantity' + i]);
-}
+    products[i].qty_ava -= Number(request.body['quantity' + i]);
+};
+
 // store quantities in qty_obj
 qty_obj = quantity_object;
 // Redirect to login page before pathing to invoice
@@ -123,7 +130,7 @@ response.redirect("./products_display.html?" +  qs.stringify(request.body) + '&'
 
 // --------------------------- Log-in --------------------------- //
 // Based on Blake Saari's (S2) server.js 
-// Example from Lab 13
+// Example from Lab 13, used to retrieve the user data from my json file
 if (fs.existsSync(user_data)) {
    var user_data = "./user_data.json"
    var data_str = fs.readFileSync(user_data, 'utf-8');
@@ -146,15 +153,20 @@ else {
        logged_in = the_email
        var the_password = request.body['password'];
 
-       // Check if password entered matches password store in JSON
+       // Check if password entered matches password stored in JSON
        if (typeof user_str[the_email] != 'undefined') {
-           if (user_str[the_email].password == the_password) {
+       // IR1 ENCRYPTION: Retrieve the salt and the hashed_password from the user_data.json file, to use the same salt to hash and encrypt the password that is entered
+       let salt = user_str[the_email].password_salt;
+       let saved_hash = user_str[the_email].password_hash;
+       // Hash the password entered during login using the same salt and parameters
+       let hash = crypto.pbkdf2Sync(the_password, salt, 1000, 64, 'sha512').toString('hex');
+           if (saved_hash == hash) {
                // If the passwords match...
                qty_obj['email'] = the_email;
                qty_obj['fullname'] = user_str[the_email].name;
                // Store quantity data     
                let params = new URLSearchParams(qty_obj);
-               console.log(qty_obj)
+               console.log(qty_obj);
                // If no errors, redirect to invoice page with quantity data
                response.redirect('./invoice.html?' + params.toString());
                return;
@@ -219,10 +231,18 @@ app.post("/registration", function (request, response) {
        // Assignment 2 Example Code -- Reading and writing user info to a JSON file
            // If there are no errors...
            if(Object.keys(registration_errors).length == 0) {
+            // IR1 ENCRYPTION: Generate a random salt
+            let salt = crypto.randomBytes(16).toString('hex');
+            let password = request.body['password'];
+            // Hash the password and the salt using the crypto library
+            let hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+               // Creating my object, getting my email and fullname.
                user_str[register_email] = {};
-               user_str[register_email].password = request.body.password;
                user_str[register_email].email = request.body.email;
-               user_str[register_email].fullnname = request.body.fullname;
+               user_str[register_email].fullname = request.body.fullname;
+               // Save the salt and the hash to the user_data.json file
+               user_str[register_email].password_salt = salt;
+               user_str[register_email].password_hash = hash;
                // Write data into user_data.json file via the user_str variable
                fs.writeFileSync(user_data, JSON.stringify(user_str));
                // Add product quantity data
@@ -262,16 +282,29 @@ app.post("/change_password", function (request, response) {
        reset_errors['repeatnewpassword'] = `The passwords you entered do not match`;
    }
 
+   // Check if the inputted email matches the email associated with the saved password
+   if(typeof user_str[current_email] == 'undefined') {
+   // Error message if email is incorrect
+   reset_errors['email'] = `The email entered has not been registered yet`
+   } else if (user_str[current_email].email != current_email) {
+   // Error message if email does not match the saved email
+   reset_errors['email'] = `The email entered does not match the email associated with this account`
+   } else {
+    // IR1 ENCRYPTION: Retrieve the salt and the hashed_password from the user_data.json file, to use the same salt to hash and encrypt the password that is entered
+    let salt = user_str[current_email].password_salt;
+    let saved_hash = user_str[current_email].password_hash;
+    let hash = crypto.pbkdf2Sync(current_password, salt, 1000, 64, 'sha512').toString('hex');
+
    // Validates that inputted email and password match credentials stored in user_data.json
    if(typeof user_str[current_email] != 'undefined') {
        // Validates that password submited matches password saved in user_data.json
-       if(user_str[current_email].password == current_password) {
+       if(user_str[current_email].password_hash == hash) {
            // Validates that password is at least 8 characters long
            if(request.body.newpassword.length < 8) {
                reset_errors['newpassword'] = `Password must be at least 8 characters`
            }
            // Validates that passwords matches user_data.json
-           if(user_str[current_email].password != current_password) {
+           if(user_str[current_email].password_hash != hash) {
                reset_errors['password'] = `The password entered is incorrect`
            }
            // Validates that inputted new passwords are identical
@@ -292,9 +325,16 @@ app.post("/change_password", function (request, response) {
                    // Error message is email is incorrect
                    reset_errors['email'] = `The email entered has not been registered yet`
                }
-   // If there are no errors... (Momoka Michimoto)
+   // If there are no errors 
    if (Object.keys(reset_errors).length == 0) {
-       user_str[current_email].password = request.body.newpassword
+       // IR1 ENCRYPTION: Generate a new random salt and overwrite the saved salt, and hash the new password and overwrite that as well.
+       salt = crypto.randomBytes(16).toString('hex');
+       let password = request.body['newpassword']; //
+       // Hash the password and the salt using the crypto library
+       hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+       // Save the salt and the hash to the user_data.json file
+       user_str[current_email].password_salt = salt;
+       user_str[current_email].password_hash = hash;
        // Write new password into user_data.json
        fs.writeFileSync(user_data, JSON.stringify(user_str), "utf-8");
        // Pass quantity data
@@ -313,7 +353,7 @@ app.post("/change_password", function (request, response) {
        response.redirect('update.html?' + params.toString());
    }
 
-})
+}});
 
 // route all other GET requests to files in public 
 app.use(express.static(__dirname + '/public'));
