@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css" href="./css/login.css">
     <!--NJ logo favicon-->
     <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
+    <!--Background Video-->
+    <video autoplay muted loop plays-inline id="myVideo">
+        <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4">
+    </video>
 <script>
 // Have my login errors ready onload
     window.onload = function () {
@@ -24,19 +28,20 @@
 </script>
 </head>
 <body>
+    <a href="index.html"><h1 id = "home">welcome to newjeans.store!</h1></a>
     <form name = "login" action = "/login" method="POST">
+        <h1 id = "title">Login here!</h1>
         <div class = "container">
-            <h1>Login</h1>
-            <p>Please login or sign-up to get to your product invoice and complete your purchase.</p>
+            <p id="black_text">Login or sign-up to get to your product invoice and complete your purchase!</p>
             <hr>
-            <label for = "email">Email</label>
+            <label id="black_text" for = "email">Email:</label>
             <input type="email" placeholder="Enter email here" name = "email" id = "email" required>
-            <label for = "password">Password</label>
+            <label id="black_text" for = "password">Password:</label>
             <input type="password" placeholder="Enter password here" name = "password" id = "password" required>
             <hr>
-            <button type="submit" value="login" name="login">Log-in</button>
-        </div>
+            <button id = "login_button" type="submit" value="login" name="login">Log-in</button>
     </form>
-    <p class="mb-0">Don't have an account yet? <a href="registration.html" class="text-white-50 fw-bold">Sign Up</a>
-</body>
+    <p  id="sign-up">Don't have an account yet? <a href="registration.html"  id="link_text">Sign Up!</a>
+    </div>
+    </body>
 </html>

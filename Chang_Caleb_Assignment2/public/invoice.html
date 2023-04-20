@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg">
   <!--Created by Caleb Chang-->
   <!--Basic invoice containing items purchased, prices, quantities, amount due, and etc.-->
 <head>
@@ -19,8 +19,6 @@
       if (params.has("quantity")) {
         quantities = JSON.parse(params.get(`quantity`));
       };
-
- 
     for (let i = 0; i < products.length; i++) {
       let quantity = params.get(`quantity${i}`);
       quantities.push(quantity);
@@ -64,23 +62,45 @@
     };
 // declare subtotal as 0 
       var subtotal = 0;
+
+      var fullname = user_str[the_email].fullname;
     </script>
+
+      <!--Background Video
+      <video autoplay muted loop plays-inline id="myVideo">
+          <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4">
+      </video>-->
 </head>
 <body>
         <script>
           // Invoice prints here
           // If there are no quantities passed, print this instead of the invoice.
           if (quantities.every(value => value == null)) {
-            document.write(`Hey (fullname), click here to check out the store!
+            if (fullname != undefined) {
+            document.write(`
+            <h1>hi ${' '+fullname}! click on the flower to check out the store!</h1>
             <hr>
             <a href="products_display.html">
-            <img src="/Images/rabbit_white.png" width="200px" height="200px">
-            </a>
-        `);
+            <img src="/Images/sun_sticker.png" width="200px" height="200px">
+            </a> 
+        `)
+            } else {
+            document.write(`
+            <h1>hi there! click on the flower to check out the store!</h1>
+            <hr>
+            <a href="products_display.html">
+            <img src="/Images/sun_sticker.png" width="200px" height="200px">
+            </a> 
+        `)
+            };
           } else {
             document.write(`
-            <h2>Thank you for your order! Your estimated shipping time will be 3-10 business days!</h2>
-    <table border="1">
+            <h2>thanks for shopping! we hope you love the merch!</h2>
+    <table border="1" id="invoice">
+      <hr>
+      <p>
+      <span id="invoice_title">here's your invoice, make sure to save it.</span>
+      </p>
         <tbody>
           <tr>
             <th style="text-align: center;" width="43%">Item</th>
@@ -132,11 +152,6 @@
           </tr>
         </tbody>
       </table>
-<!--Shipping policy details, could omit-->
-<p>Current Shipping Policy</p>
-<p>A subtotal $0 - $49.99 will be $2 shipping,</p>
-<p>A subtotal $50 - $99.99 will be $5 shipping,</p>
-<p>Subtotals over $100 will be charged 5% of the subtotal amount.</p>
 </body>
 <!--Pathway back to the store page to more easily check inventory updates-->
 <h3>Click on the bunny to go back to the store page!</h3>

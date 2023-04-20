@@ -1,6 +1,82 @@
 img:hover {
     box-shadow: 0 0 2px 2px royalblue;
-};
+}
+/*BG VIDEO CSS*/
+#myVideo {
+    position: relative;
+    opacity: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+  /*BG IMAGE CSS*/
+.bg {
+        position: relative;
+        opacity: 1;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("/Images/NJ_SouthPark.png");
+        height: 100%;
+        z-index: -1;
+}
+.shipping {
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
+    cursor: url('/Images/cursors/text.cur'), auto;
+}
+h1, h2, h3 {
+    text-align: center;
+    color: aliceblue;
+    text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
+    cursor: url('/Images/cursors/text.cur'), auto;
+}
+/*CURSORCSS*/
+a {
+    cursor: url('/Images/cursors/link.cur'), auto;
+}
 html {
+    z-index: 1;
     cursor: url('/Images/cursors/normal.cur'), auto;
+    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;  
+}
+input {
+    cursor: url('/Images/cursors/text.cur'), auto;
+    font-family: "Calisto MT";
+}
+#login_button {
+    cursor: url('/Images/cursors/link.cur'), auto;
+    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;  
+    font-weight: bold;
+}
+label {
+    cursor: url('/Images/cursors/normal.cur'), auto;
+}
+table {
+    text-align: center;
+    background-color: white;
+    border: 5px;
+    border-color: aliceblue;
+}
+body {
+    text-align: center;
+    width: 100%; 
+    height: 100%;
+}
+#invoice {
+    margin-left: auto;
+    margin-right: auto;
+}
+#invoice_title {
+    text-align: center;;
+    text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
+    cursor: url('/Images/cursors/text.cur'), auto;
+    font-weight: bold;
+    color: aliceblue;
+}
+hr {
+    border: 0;
+    height: 0; 
+    box-shadow: 0 0 10px 1px black;
 }
