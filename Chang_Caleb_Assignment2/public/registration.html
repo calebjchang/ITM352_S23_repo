@@ -30,45 +30,41 @@
       }
   </script>
 </head>
-<body>
-  <!-- Navigation Bar (can probably omit)-->
-      <div class="navbar-header">
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="./index.html">home</a></li>
-          <li><a href="./products_display.html">newjeans.store</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="./update.html">your account</a></li>
-        </ul>
-      </div>
-    </div>
 
+      <!-- Navigation Bar -->
+      <div id="topnav">
+        <a class = active href="./index.html">home</a>
+        <a href="./products_display.html">newjeans.store</a>
+        <a href="./login.html">login</a>
+        <a href="./registration.html">register</a>
+        <a href="./update.html">your account</a>
+       </div>
+ </div>
+    <body>
   <!-- Page Header-->
-  <div class="jumbotron">
-    <div class="container text-center">
-      <h1>register here!</h1>      
-    </div>
-  </div>
+  <div class="text">
+      <h1>Register here!</h1>      
+      <p id="black_text">Register then login to get to your product invoice and complete your purchase!</p>
+      <hr>
 <!--Empty li's are placeholders to readjust formatting-->
 <form name='register' action="/registration" method="POST">
         <ul id='register_form'>
-          <li><label for="email">Email:</label><input type="text" name="email" size="50" placeholder="Enter email here"/></li>
+          <li><label for="email" id="input_title">Email:</label><input type="text" name="email" size="50" placeholder="Enter email here"/></li>
           <li></li>
           <li><label id="email_label" class="form-label" for="email"></label></li>
-          <li><label for="fullname">Name:</label><input type="text" name="fullname" size="50" placeholder="Enter full name here"/></li>
+          <li><label for="fullname" id="input_title">Name:</label><input type="text" name="fullname" size="50" placeholder="Enter full name here"/></li>
           <li></li>
           <li><label id="fullname_label" class="form-label" for="fullname"></label></li>
-          <li><label for="passid">Password:</label><input type="password" name="password" size="50" placeholder="Enter password here"/></li>
+          <li><label for="passid" id="input_title">Password:</label><input type="password" name="password" size="50" placeholder="Enter password here"/></li>
           <li></li>
           <li><label id="password_label" class="form-label" for="password"></label></li>
-          <li><label for="passid">Repeat password:</label><input type="password" name="repeat_password" size="50" placeholder="Repeat password here"/></li>
+          <li><label for="passid" id="input_title">Repeat:</label><input type="password" name="repeat_password" size="50" placeholder="Repeat password here"/></li>
           <li></li>
           <li><label id="repeat_password_label" class="form-label" for="repeat_password"></label></li>
           <br>
           <li><input type="submit" id="register_button" name="submit" value="Register" action="/registration" method="POST"></li>
         </ul>
-      </form>      
+      </form>    
+      </div>  
 </body>
 </html>

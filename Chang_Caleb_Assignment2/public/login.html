@@ -28,11 +28,20 @@
 </script>
 </head>
 <body>
-    <a href="index.html"><h1 id = "home">welcome to newjeans.store!</h1></a>
+      <!-- Navigation Bar -->
+      <div id="topnav">
+        <a class = active href="./index.html">home</a>
+        <a href="./products_display.html">newjeans.store</a>
+        <a href="./login.html">login</a>
+        <a href="./registration.html">register</a>
+        <a href="./update.html">your account</a>
+       </div>
+ </div>
+
     <form name = "login" action = "/login" method="POST">
         <h1 id = "title">Login here!</h1>
         <div class = "container">
-            <p id="black_text">Login or sign-up to get to your product invoice and complete your purchase!</p>
+            <p id="white_text">Login to get to your product invoice and complete your purchase!</p>
             <hr>
             <label id="black_text" for = "email">Email:</label>
             <input type="email" placeholder="Enter email here" name = "email" id = "email" required>

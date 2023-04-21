@@ -15,8 +15,25 @@ p {
     min-height: auto;
     z-index: -1;
   }
+#change_password{
+    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;  
+    font-weight: bold;
+  }
 input {
-    font-family: "Calisto MT"
+    font-family: "Calisto MT";
+    text-align: center;
+    width: 400px;
+  }
+h1, h2, h3 {
+    text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
+    color: aliceblue;
+}
+#input_title {
+    float: none;
+    padding: 10px;
+    margin: 20px;
+    text-shadow: 1px 1px 1px rgba(11, 17, 36, 0.832);
+    color: aliceblue;
 }
 #home {
     font-size: large;
@@ -31,8 +48,8 @@ body {
     text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
 }
 #black_text {
-    text-shadow: 1px 1px 1px rgba(165, 185, 255, 0.832);
-    color:  rgba(0, 23, 107, 0.832);
+    text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
+    color: aliceblue;
 }
 #sign-up {
     text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
@@ -44,6 +61,28 @@ body {
 ul {
     list-style: none;
 }
+/* NAVBAR CSS RIPPED*/
+#topnav {
+    overflow: hidden;
+    font-weight: bold;
+    z-index: 1;
+    text-align: center;
+  }
+#topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: large;
+    text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
+  }
+#topnav a:hover {
+    background-color: rgba(0, 38, 110, 0.622);
+    color: aliceblue;
+  }
+#topnav a.active:hover {
+    color: aliceblue;
+    background-color: rgba(0, 38, 110, 0.622);
+  }
 /*CURSORCSS*/
 a {
     cursor: url('/Images/cursors/link.cur'), auto;

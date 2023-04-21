@@ -18,6 +18,10 @@ p {
 #home {
     font-size: large;
 }
+p {
+    text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
+    color: aliceblue;
+}
 body {
     text-align: center;
     width: 100%; 
@@ -39,6 +43,28 @@ body {
     color: #ff1cca;
     text-decoration-style: double;
 }
+/* NAVBAR CSS RIPPED*/
+#topnav {
+    overflow: hidden;
+    font-weight: bold;
+    z-index: 1;
+    text-align: center;
+  }
+#topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: large;
+    text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
+  }
+#topnav a:hover {
+    background-color: rgba(0, 38, 110, 0.622);
+    color: aliceblue;
+  }
+#topnav a.active:hover {
+    color: aliceblue;
+    background-color: rgba(0, 38, 110, 0.622);
+  }
 /*CURSORCSS*/
 a {
     cursor: url('/Images/cursors/link.cur'), auto;

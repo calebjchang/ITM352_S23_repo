@@ -171,6 +171,7 @@ app.post("/login", function (request, response) {
       params.append("fullname", pass_name);
       // If no errors, redirect to invoice page with quantity data
       response.redirect("./invoice.html?" + params.toString());
+      qty_obj = {};
       return;
       // If password incorrect add to errors variable
     } else {
@@ -260,7 +261,7 @@ app.post("/registration", function (request, response) {
     qty_obj["email"] = register_email;
     qty_obj["fullname"] = user_str[register_email].name;
     let params = new URLSearchParams(qty_obj);
-    // If registered send to invoice with product quantity data
+    // If registered send to login with product quantity data
     response.redirect("./login.html?" + params.toString());
   } else {
     // If errors exist, redirect to registration page with errors
