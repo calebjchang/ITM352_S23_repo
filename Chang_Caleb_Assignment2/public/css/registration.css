@@ -18,6 +18,13 @@ p {
 input {
     font-family: "Calisto MT"
   }
+h1, h2, h3 {
+    color: aliceblue;
+}
+li {
+    text-shadow: 1px 1px 1px rgba(11, 17, 36, 0.832);
+    color: aliceblue;
+}
 #home {
     font-size: large;
 }
@@ -25,18 +32,16 @@ body {
     text-align: center;
     width: 100%; 
     height: 100%;
-    margin: 0 auto;
     font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;  
     font-weight: bold;
     text-shadow: 2px 2px 2px rgba(46,91,173,0.6);
 }
-#black_text {
-    text-shadow: 1px 1px 1px rgba(165, 185, 255, 0.832);
-    color:  rgba(0, 23, 107, 0.832);
-}
 #sign-up {
     text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
     color: aliceblue;
+}
+label {
+    padding: 20px;
 }
 #link_text{
     color: #e736be;
@@ -53,7 +58,7 @@ input {
     cursor: url('/Images/cursors/text.cur'), auto;
     font-family: "Calisto MT";
 }
-#login_button {
+#register_button {
     cursor: url('/Images/cursors/link.cur'), auto;
     font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;  
     font-weight: bold;

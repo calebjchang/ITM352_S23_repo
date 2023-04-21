@@ -15,10 +15,14 @@
       // Nearly all of the below code is pulled from Store1/Invoice3 WOD with minor changes made to accomodate CSS and new data.
       //query string params from products_display.html
       let params = (new URL(document.location)).searchParams;
-      quantities = [];
+      let quantities = [];
+      fullname = '';
       if (params.has("quantity")) {
         quantities = JSON.parse(params.get(`quantity`));
       };
+      if (params.has('fullname')) {
+            fullname = params.get('fullname');
+        };
     for (let i = 0; i < products.length; i++) {
       let quantity = params.get(`quantity${i}`);
       quantities.push(quantity);
@@ -62,8 +66,6 @@
     };
 // declare subtotal as 0 
       var subtotal = 0;
-
-      var fullname = user_str[the_email].fullname;
     </script>
 
       <!--Background Video
@@ -74,11 +76,11 @@
 <body>
         <script>
           // Invoice prints here
-          // If there are no quantities passed, print this instead of the invoice.
+          // Depending on whether or not values were passed properly, print different iterations of the invoice page.
           if (quantities.every(value => value == null)) {
-            if (fullname != undefined) {
+            if (fullname == undefined) {
             document.write(`
-            <h1>hi ${' '+fullname}! click on the flower to check out the store!</h1>
+            <h1>hi there ! click on the flower to check out the store!</h1>
             <hr>
             <a href="products_display.html">
             <img src="/Images/sun_sticker.png" width="200px" height="200px">
@@ -86,15 +88,82 @@
         `)
             } else {
             document.write(`
-            <h1>hi there! click on the flower to check out the store!</h1>
+            <h1>hi ${fullname}! click on the flower to check out the store!</h1>
             <hr>
             <a href="products_display.html">
             <img src="/Images/sun_sticker.png" width="200px" height="200px">
-            </a> 
+            </a>
         `)
             };
           } else {
+            if (fullname != undefined) {
             document.write(`
+            <h2>thanks for shopping ${fullname}! we hope you love the merch!</h2>
+    <table border="1" id="invoice">
+      <hr>
+      <p>
+      <span id="invoice_title">here's your invoice, make sure to save it.</span>
+      </p>
+        <tbody>
+          <tr>
+            <th style="text-align: center;" width="43%">Item</th>
+            <th style="text-align: center;" width="11%">quantity</th>
+            <th style="text-align: center;" width="13%">price</th>
+            <th style="text-align: center;" width="54%">extended price</th>
+          </tr>
+            `);
+            generate_item_rows(quantities);
+          //Compute tax
+           var tax = subtotal*0.0575;
+          //Compute Shipping
+           var shipping = Number
+             if (subtotal<=50) {
+               shipping=2
+             } else if(subtotal<=100) {
+               shipping=5
+            }
+              else {
+               shipping=0.05*subtotal
+             };
+        //Compute grand total
+        var total = subtotal+tax+shipping;
+        document.write(`
+        <tr>
+            <td colspan="4" width="100%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+            <td width="54%">$
+                ${subtotal.toFixed(2)}
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><span>Tax @ 5.75%</span></td>
+            <td width="54%">$
+                ${tax.toFixed(2)}
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><span>Shipping</span></td>
+            <td width="54%">$
+                ${shipping.toFixed(2)}
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+            <td width="54%"><strong>$
+                ${total.toFixed(2)}
+                        </strong></td>
+          </tr>
+        </tbody>
+      </table>
+</body>
+<!--Pathway back to the store page to more easily check inventory updates-->
+<h3>Click on the bunny to go back to the store page!</h3>
+    <p>
+        <a href="products_display.html">
+            <img src="/Images/rabbit_white.png" width="200px" height="200px">
+        </a>`)
+      } else {
+        document.write(`
             <h2>thanks for shopping! we hope you love the merch!</h2>
     <table border="1" id="invoice">
       <hr>
@@ -159,6 +228,6 @@
         <a href="products_display.html">
             <img src="/Images/rabbit_white.png" width="200px" height="200px">
         </a>`)
-          };     
+      }};     
     </script>   
 </html>

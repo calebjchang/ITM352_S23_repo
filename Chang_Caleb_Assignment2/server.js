@@ -164,9 +164,11 @@ app.post("/login", function (request, response) {
     if (saved_hash == hash) {
       // If the passwords match...
       qty_obj["email"] = the_email;
-      qty_obj["fullname"] = user_str[the_email].name;
+      qty_obj["fullname"] = user_str[the_email].fullname;
+      var pass_name = user_str[the_email].fullname;
       // Store quantity data
       let params = new URLSearchParams(qty_obj);
+      params.append("fullname", pass_name);
       // If no errors, redirect to invoice page with quantity data
       response.redirect("./invoice.html?" + params.toString());
       return;
