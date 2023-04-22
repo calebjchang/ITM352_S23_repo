@@ -1,6 +1,6 @@
 // Author: Caleb Chang
 // Server used to validate data inputted in the webstore, and path to either an error message on the same page or redirect to the invoice page.
-// Updated to include a login, registration, and profile edit page
+// Updated to include a login, registration, and profile edit page, based on Blake Saari's S22 server.js
 // Used an online code formatter to adjust "ugliness" in code 
 
 //Load in query string, product info, and express package, cookie parser and session middleware, and user information
@@ -34,7 +34,7 @@ function isNonNegInt(q, returnErrors = false) {
 }
 
 // Created function used to check input in the textbox and add an error message below in real time.
-// Used assistance from ChatGPT to tweak the below function from Lab 12 (lines 23 - 41) to dynamically change my error message, as well as match A1: IR3's criteria (red border color, error msg, & replacing input value to the qty_available)
+// Used assistance from ChatGPT to tweak the below function from Lab 12 (lines 38 - 56) to dynamically change my error message, as well as match A1: IR3's criteria (red border color, error msg, & replacing input value to the qty_available)
 function checkQuantityTextbox(qtyTextbox) {
   const qtyAva = parseInt(qtyTextbox.dataset.qtyAva); // Get available quantity from dataset
   const qty = parseInt(qtyTextbox.value); // Get entered quantity
@@ -77,7 +77,7 @@ app.post("/purchase", function (request, response, next) {
   // Quantities array to hold my quantites to take to login
   var quantities = [];
   quantities = request.body;
-  // Below code (lines 67 - 103) based on Branson Suzuki's (F22) server.js
+  // Below code (lines 81 - 130 based on Branson Suzuki's (F22) server.js
   // Declaring q as a empty variable, setting the has_quantity default to false (eg. quantities haven't been entered yet), and an empty errors object.
   var q;
   var has_quantity = false;
@@ -189,7 +189,6 @@ app.post("/login", function (request, response) {
 
 // ---------------------------  Registration --------------------------- //
 // Based on Blake Saari's (S2) server.js
-// Error messages and alert not displaying, fixable, made quantities pass through by pathing to login then to invoice
 
 app.post("/registration", function (request, response) {
   // Start with 0 registration errors
@@ -238,7 +237,7 @@ app.post("/registration", function (request, response) {
       "fullname"
     ] = `Please enter a name less than 30 characters`;
   }
-  // Lines 232-260 based on both the example code provided in class and Blake Saari's (S22)
+  // Lines 241-271 based on both the example code provided in class and Blake Saari's (S22)
   // If there are no errors...
   if (Object.keys(registration_errors).length == 0) {
     // A2IR1 ENCRYPTION: First, generate a random salt
@@ -272,7 +271,7 @@ app.post("/registration", function (request, response) {
 });
 
 // --------------------------- Change Registration Details --------------------------- //
-
+// Based on Blake Saari's (S2) server.js
 app.post("/change_password", function (request, response) {
   // Start with no errors
   var reset_errors = {};
