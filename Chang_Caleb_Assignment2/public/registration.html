@@ -1,70 +1,135 @@
-  <!-- Author: Caleb Chang -->
-  <!-- Registration page to let users create an account -->
+<!-- Author: Caleb Chang -->
+<!-- Registration page to let users create an account -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NewJeans</title>
-    <link rel="stylesheet" type="text/css" href="./css/registration.css">
+    <link rel="stylesheet" type="text/css" href="./css/registration.css" />
     <!--NJ logo favicon-->
-    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
-        <!--Background Video-->
-        <video autoplay muted loop plays-inline id="myVideo">
-          <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4">
-      </video>
+    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png" />
+    <!--Background Video-->
+    <video autoplay muted loop plays-inline id="myVideo">
+      <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4" />
+    </video>
     <script>
-      // Load errors onload, Based on Blake Saari S22
+      // Have my errors load up on window onload, and grab params from the URL string, Lines 19 - 32 based on Blake Saari's (S22) code
       window.onload = function () {
-          let params = (new URL(document.location)).searchParams;
-              if (params.has('registration_errors')) {
-                  var errors = JSON.parse(params.get('registration_errors'));
-                  let errors_string = '';
-                  for (err in errors) {
-                      errors_string += errors[err] + '\n';
-                      document.getElementById(`${err}_label`).innerHTML = `<font color="red">${errors[err]}</font>`;
-                  }
-                  alert(errors_string);
-              }
-      }
-  </script>
-</head>
+        let params = new URL(document.location).searchParams;
+        if (params.has("registration_errors")) {
+          var errors = JSON.parse(params.get("registration_errors"));
+          let errors_string = "";
+          for (err in errors) {
+            errors_string += errors[err] + "\n";
+            document.getElementById(
+              `${err}_label`
+            ).innerHTML = `<font color="red">${errors[err]}</font>`;
+          }
+          alert(errors_string);
+        }
+      };
+    </script>
+  </head>
 
-      <!-- Navigation Bar -->
-      <div id="topnav">
-        <a class = active href="./index.html">home</a>
-        <a href="./products_display.html">newjeans.store</a>
-        <a href="./login.html">login</a>
-        <a href="./registration.html">register</a>
-        <a href="./update.html">your account</a>
-       </div>
- </div>
-    <body>
-  <!-- Page Header-->
-  <div class="text">
-      <h1>Register here!</h1>      
-      <p id="black_text">Register then login to get to your product invoice and complete your purchase!</p>
-      <hr>
-<!--Empty li's are placeholders to readjust formatting-->
-<form name='register' action="/registration" method="POST">
-        <ul id='register_form'>
-          <li><label for="email" id="input_title">Email:</label><input type="text" name="email" size="50" placeholder="Enter email here"/></li>
+  <!-- Navigation Bar -->
+  <div id="topnav">
+    <a class="active" href="./index.html">home</a>
+    <a href="./products_display.html">newjeans.store</a>
+    <a href="./login.html">login</a>
+    <a href="./registration.html">register</a>
+    <a href="./update.html">your account</a>
+  </div>
+  <body>
+    <!-- Page Header-->
+    <div class="text">
+      <h1>Register here!</h1>
+      <p id="black_text">
+        Register then login to get to your product invoice and complete your
+        purchase!
+      </p>
+      <hr />
+      <!--Empty li's are placeholders to readjust formatting-->
+      <form name="register" action="/registration" method="POST">
+        <ul id="register_form">
+          <li>
+            <label for="email" id="input_title">Email:</label
+            ><input
+              type="text"
+              name="email"
+              size="50"
+              placeholder="Enter email here"
+            />
+          </li>
           <li></li>
-          <li><label id="email_label" class="form-label" for="email"></label></li>
-          <li><label for="fullname" id="input_title">Name:</label><input type="text" name="fullname" size="50" placeholder="Enter full name here"/></li>
+          <li>
+            <label id="email_label" class="form-label" for="email"></label>
+          </li>
+          <li>
+            <label for="fullname" id="input_title">Name:</label
+            ><input
+              type="text"
+              name="fullname"
+              size="50"
+              placeholder="Enter full name here"
+            />
+          </li>
           <li></li>
-          <li><label id="fullname_label" class="form-label" for="fullname"></label></li>
-          <li><label for="passid" id="input_title">Password:</label><input type="password" name="password" size="50" placeholder="Enter password here"/></li>
+          <li>
+            <label
+              id="fullname_label"
+              class="form-label"
+              for="fullname"
+            ></label>
+          </li>
+          <li>
+            <label for="passid" id="input_title">Password:</label
+            ><input
+              type="password"
+              name="password"
+              size="50"
+              placeholder="Enter password here"
+            />
+          </li>
           <li></li>
-          <li><label id="password_label" class="form-label" for="password"></label></li>
-          <li><label for="passid" id="input_title">Repeat:</label><input type="password" name="repeat_password" size="50" placeholder="Repeat password here"/></li>
+          <li>
+            <label
+              id="password_label"
+              class="form-label"
+              for="password"
+            ></label>
+          </li>
+          <li>
+            <label for="passid" id="input_title">Repeat:</label
+            ><input
+              type="password"
+              name="repeat_password"
+              size="50"
+              placeholder="Repeat password here"
+            />
+          </li>
           <li></li>
-          <li><label id="repeat_password_label" class="form-label" for="repeat_password"></label></li>
-          <br>
-          <li><input type="submit" id="register_button" name="submit" value="Register" action="/registration" method="POST"></li>
+          <li>
+            <label
+              id="repeat_password_label"
+              class="form-label"
+              for="repeat_password"
+            ></label>
+          </li>
+          <br />
+          <li>
+            <input
+              type="submit"
+              id="register_button"
+              name="submit"
+              value="Register"
+              action="/registration"
+              method="POST"
+            />
+          </li>
         </ul>
-      </form>    
-      </div>  
-</body>
+      </form>
+    </div>
+  </body>
 </html>

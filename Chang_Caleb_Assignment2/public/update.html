@@ -1,79 +1,113 @@
-  <!-- Author: Caleb Chang -->
-  <!-- Page to let users view their account details and make changes-->
+<!-- Author: Caleb Chang -->
+<!-- Page to let users view their account details and make changes-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NewJeans</title>
-    <link rel="stylesheet" type="text/css" href="./css/update.css">
+    <link rel="stylesheet" type="text/css" href="./css/update.css" />
     <!--NJ logo favicon-->
-    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png">
-        <!--Background Video-->
-        <video autoplay muted loop plays-inline id="myVideo">
-          <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4">
-      </video>
+    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png" />
+    <!--Background Video-->
+    <video autoplay muted loop plays-inline id="myVideo">
+      <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4" />
+    </video>
     <script>
-      // Load errors onload, Based on Blake Saari S22
+      // Have my errors load up on window onload, and grab params from the URL string, Lines 24 - 33 based on Blake Saari's (S22) code
       window.onload = function () {
-          let params = (new URL(document.location)).searchParams;
-              if (params.has('email')) {
-                  email.value = params.get('email')
-              }
-              if (params.has('reset_errors')) {
-                  var errors = JSON.parse(params.get('reset_errors'));
-                  let errors_string = '';
-                  for (err in errors) {
-                      errors_string += errors[err] + '\n';
-                      document.getElementById(`${err}_label`).innerHTML = `<font color="red">${errors[err]}</font>`;
-                  }
-                  alert(errors_string);
-              }
-      }
-  </script>
-</head>
-<body>
-      <!-- Navigation Bar -->
-      <div id="topnav">
-        <a class = active href="./index.html">home</a>
-        <a href="./products_display.html">newjeans.store</a>
-        <a href="./login.html">login</a>
-        <a href="./registration.html">register</a>
-        <a href="./update.html">your account</a>
-       </div>
- </div>
-</div>
-      <form name = "change_password" action="./change_password" method="POST">
-  
-          <h1>Change your log-in credentials!</h1>
-          <p id="black_text">Fill in your email and password then enter a new one!</p>
-          <hr>
-          <div>
-            <label for="email" id="input_title">Email:</label><input placeholder="E-mail" type="email" name="email" id="email">
-          <label class="form-label" id="email_label" for="email"></label>
-          </div>
-          <br>
-          <div>
-            <label for="email" id="input_title">Password:</label><input placeholder="Password" type="password" name="password" id="password">
-          <label class="form-label" id="password_label" for="password"></label>
-          </div>
-          <br>
-          
-          <div>
-            <label for="email" id="input_title">New Password:</label><input placeholder="Enter new password" type="password" name="newpassword" id="newpassword">
-          <label class="form-label" id="newpassword_label" for="newpassword"></label>
-          </div>
-          <br>
-          <div>
-            <label for="email" id="input_title">Repeat:</label><input placeholder="Repeat new password" type="password" name="repeatnewpassword" id="repeatnewpassword">
-          <label class="form-label" id="repeatnewpassword_label" for="repeatnewpassword"></label>
-          </div>
-          <br>
-          <div>
-              <button type="submit" id="change_password" name="change_password" onclick="">Change Password</button>
-          </div>
-  
-      </form>
+        let params = new URL(document.location).searchParams;
+        if (params.has("email")) {
+          email.value = params.get("email");
+        }
+        if (params.has("reset_errors")) {
+          var errors = JSON.parse(params.get("reset_errors"));
+          let errors_string = "";
+          for (err in errors) {
+            errors_string += errors[err] + "\n";
+            document.getElementById(
+              `${err}_label`
+            ).innerHTML = `<font color="red">${errors[err]}</font>`;
+          }
+          alert(errors_string);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div id="topnav">
+      <a class="active" href="./index.html">home</a>
+      <a href="./products_display.html">newjeans.store</a>
+      <a href="./login.html">login</a>
+      <a href="./registration.html">register</a>
+      <a href="./update.html">your account</a>
+    </div>
+    <form name="change_password" action="./change_password" method="POST">
+      <h1>Change your log-in credentials!</h1>
+      <p id="black_text">
+        Fill in your email and password then enter a new one!
+      </p>
+      <hr />
+      <div>
+        <label for="email" id="input_title">Email:</label
+        ><input placeholder="E-mail" type="email" name="email" id="email" />
+        <label class="form-label" id="email_label" for="email"></label>
+      </div>
+      <br />
+      <div>
+        <label for="email" id="input_title">Password:</label
+        ><input
+          placeholder="Password"
+          type="password"
+          name="password"
+          id="password"
+        />
+        <label class="form-label" id="password_label" for="password"></label>
+      </div>
+      <br />
+
+      <div>
+        <label for="email" id="input_title">New Password:</label
+        ><input
+          placeholder="Enter new password"
+          type="password"
+          name="newpassword"
+          id="newpassword"
+        />
+        <label
+          class="form-label"
+          id="newpassword_label"
+          for="newpassword"
+        ></label>
+      </div>
+      <br />
+      <div>
+        <label for="email" id="input_title">Repeat:</label
+        ><input
+          placeholder="Repeat new password"
+          type="password"
+          name="repeatnewpassword"
+          id="repeatnewpassword"
+        />
+        <label
+          class="form-label"
+          id="repeatnewpassword_label"
+          for="repeatnewpassword"
+        ></label>
+      </div>
+      <br />
+      <div>
+        <button
+          type="submit"
+          id="change_password"
+          name="change_password"
+          onclick=""
+        >
+          Change Password
+        </button>
+      </div>
+    </form>
   </body>
 </html>

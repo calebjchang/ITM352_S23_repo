@@ -16,11 +16,13 @@ h1 {
     font-size: xx-large;
 }
 #icon {
-    width: 24px;
-    height: 17px;
+    width: 32px;
+    height: 24px;
     cursor: url('/Images/cursors/link.cur'), auto;
-    padding: 3px;
-    display: inline;
+    padding: 10px;
+}
+iframe {
+    cursor: url('/Images/cursors/normal.cur'), auto;
 }
 #myVideo {
     position: absolute;
