@@ -1,0 +1,72 @@
+<!-- Author: Caleb Chang -->
+<!-- Login page to let users log in to begin shopping -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NewJeans</title>
+    <link rel="stylesheet" type="text/css" href="./css/login.css" />
+    <!--NJ logo favicon-->
+    <link rel="icon" type="image/x-icon" href="/Images/favicon_nj_x57.png" />
+    <!--Background Video-->
+    <video autoplay muted loop plays-inline id="myVideo">
+      <source src="/Images/NJ_bg2023_24fps.mp4" type="video/mp4" />
+    </video>
+    <script>
+      // Have my errors load up on window onload, and grab params from the URL string, Lines 19 - 27 based on Blake Saari's (S22) code
+      window.onload = function () {
+        let params = new URL(document.location).searchParams;
+        if (params.has("login_error")) {
+          alert(params.get("login_error"));
+        }
+        if (params.has("email")) {
+          email.value = params.get("email");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div id="topnav">
+      <a class="active" href="./index.html">home</a>
+      <a href="./products_display.html">newjeans.store</a>
+      <a href="./login.html">login</a>
+      <a href="./registration.html">register</a>
+      <a href="./update.html">your account</a>
+    </div>
+
+    <form name="login" action="/login" method="POST">
+      <h1 id="title">Login here!</h1>
+      <p id="white_text">
+        Login to get to your product invoice and complete your purchase!
+      </p>
+      <hr />
+      <label id="black_text" for="email">Email:</label>
+      <input
+        type="email"
+        placeholder="Enter email here"
+        name="email"
+        id="email"
+        required
+      />
+      <label id="black_text" for="password">Password:</label>
+      <input
+        type="password"
+        placeholder="Enter password here"
+        name="password"
+        id="password"
+        required
+      />
+      <hr />
+      <button id="login_button" type="submit" value="login" name="login">
+        Log-in
+      </button>
+    </form>
+    <p id="sign-up">
+      Don't have an account yet?
+      <a href="registration.html" id="link_text">Sign Up!</a>
+    </p>
+  </body>
+</html>
