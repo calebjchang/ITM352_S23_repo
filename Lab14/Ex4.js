@@ -32,6 +32,8 @@ app.use(session({secret: "MySecretKey", resave: true, saveUninitialized: true}))
 
 // route to set a cookie 
 app.get("/use_session", function (request, response) {
+    // request.session.destroy();
+    delete request.session['lastLogin']
     response.send(` welcome, your session ID is ${request.sessionID}`);
  });
 
@@ -53,14 +55,21 @@ app.get("/use_cookie", function (request, response) {
  });
 
 app.get("/login", function (request, response) {
+    console.log(request.session);
     // check if lastLogin is in useres session
     var lastTimeLogin = 'First login!';
     if(typeof request.session["lastLogin"] != 'undefined') {
         lastTimeLogin = request.session["lastLogin"];
     }
+    var username_welcome = 'Please log in';
+    if(request.cookies.hasOwnProperty('username')) {
+        username_welcome = `Welcome ${request.cookies['username']}`;
+    }
     // Give a simple login form
     str = `
 <body>
+${username_welcome}
+<br>
 You last logged in on ${lastTimeLogin}
 <br>
 <form action="" method="POST">
@@ -75,7 +84,7 @@ You last logged in on ${lastTimeLogin}
 
 app.post("/login", function (request, response) {
     // Process login form POST and redirect to logged in page if ok, back to login page if not
-    console.log(request.body);
+
     var username = request.body["username"];
     var password = request.body["password"];
     // check if username is in user_data
@@ -87,7 +96,7 @@ app.post("/login", function (request, response) {
             var loginDate = (new Date()).toString();
             // add lastLogin to session
             request.session['lastLogin'] = loginDate;
-            response.cookie(`username`)
+            response.cookie('username', username);
             response.send(` ${username} logged in on ${loginDate}`);
             console.log(request.session);
         } else {
