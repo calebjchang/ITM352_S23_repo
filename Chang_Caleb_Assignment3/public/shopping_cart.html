@@ -81,7 +81,17 @@
         if (fullname == undefined) {
           // No quantities, No fullname
           document.write(`
-            <h1>hi there ! click on the flower to go back home!</h1>
+          <!-- Navigation Bar -->
+    <div id="topnav">
+      <a class="active" href="./index.html">home</a>
+      <a href="./albums.html">albums</a>
+      <a href="./accessories.html">accessories</a>
+      <a href="./merch.html">merch</a>
+      <a href="./login.html">login</a>
+      <a href="./registration.html">register</a>
+      <a href="./update.html">your account</a>
+    </div>
+            <h1>your cart is empty! go back to the store to start shopping</h1>
             <hr>
             <a href="index.html">
             <img src="/Images/sun_sticker.png" width="200px" height="200px">
@@ -90,7 +100,17 @@
         } else {
           // No quantities, Yes fullname 
           document.write(`
-            <h1>hi ${fullname}! click on the flower to go back home!</h1>
+          <!-- Navigation Bar -->
+    <div id="topnav">
+      <a class="active" href="./index.html">home</a>
+      <a href="./albums.html">albums</a>
+      <a href="./accessories.html">accessories</a>
+      <a href="./merch.html">merch</a>
+      <a href="./login.html">login</a>
+      <a href="./registration.html">register</a>
+      <a href="./update.html">your account</a>
+    </div>
+            <h1>hi ${fullname}! your cart is empty! go back to the store to start shopping</h1>
             <hr>
             <a href="index.html">
             <img src="/Images/sun_sticker.png" width="200px" height="200px">

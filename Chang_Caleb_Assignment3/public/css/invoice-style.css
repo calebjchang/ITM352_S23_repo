@@ -80,3 +80,25 @@ hr {
     height: 0; 
     box-shadow: 0 0 10px 1px black;
 }
+  /* NAVBAR CSS RIPPED*/
+  #topnav {
+    overflow: hidden;
+    font-weight: bold;
+    z-index: 1;
+    text-align: center;
+  }
+#topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: large;
+    text-shadow: 1px 1px 1px rgba(46,91,173,0.6);
+  }
+#topnav a:hover {
+    background-color: rgba(0, 38, 110, 0.622);
+    color: aliceblue;
+  }
+#topnav a.active:hover {
+    color: aliceblue;
+    background-color: rgba(0, 38, 110, 0.622);
+  }
